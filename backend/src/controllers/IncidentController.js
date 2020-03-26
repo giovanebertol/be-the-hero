@@ -27,9 +27,12 @@ module.exports={
 
     async create(request, response){
         /*Destruturação*/ 
-        const{title, description, value} = request.body;                
+        const{title, description} = request.body;                
         const ong_id = request.headers.authorization;
         
+        let {value} = request.body;
+
+        value = value.replace(',','.');
 
         /*Conexão com o banco de dados*/
         const [id] = await connection('incidents').insert({
